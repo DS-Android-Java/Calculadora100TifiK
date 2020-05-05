@@ -6,15 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText pantalla;
     public double operando1, operando2, res;
-    public Button button0, button1, button2, button3,button4, button5, button6, button7, button8, button9, division,
-            multiplicacion, clear, delete, suma, resta, potencia, porcentaje, coma, parentesis,
-            seno,coseno,tangente,igual,invercoseno,inverseno,invertangente,off,factorial,alapotencia;
     int op;
+
+    public int idsBtns[] = {R.id.num0,R.id.num1,R.id.num2,R.id.num3,R.id.num4,R.id.num5,R.id.num6,R.id.num7,R.id.num8,R.id.num9,
+            R.id.division,R.id.multi,R.id.clear,R.id.delete,R.id.suma,R.id.resta,R.id.raiz,R.id.porcentaje,R.id.coma,R.id.parentesis,
+            R.id.seno,R.id.coseno,R.id.tangente,R.id.igual,R.id.invercoseno,R.id.inverseno,R.id.invertangente,R.id.off,
+            R.id.factorial,R.id.potencia};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,69 +28,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         pantalla = (EditText) findViewById(R.id.pantalla);
 
-        button0 = findViewById(R.id.num0);
-        button1 = findViewById(R.id.num1);
-        button2 = findViewById(R.id.num2);
-        button3 = findViewById(R.id.num3);
-        button4 = findViewById(R.id.num4);
-        button5 = findViewById(R.id.num5);
-        button6 = findViewById(R.id.num6);
-        button7 = findViewById(R.id.num7);
-        button8 = findViewById(R.id.num8);
-        button9 = findViewById(R.id.num9);
-        division = findViewById(R.id.division);
-        multiplicacion = findViewById(R.id.multi);
-        clear = findViewById(R.id.clear);
-        delete = findViewById(R.id.delete);
-        suma = findViewById(R.id.suma);
-        resta = findViewById(R.id.resta);
-        potencia = findViewById(R.id.raiz);
-        porcentaje = findViewById(R.id.porcentaje);
-        coma = findViewById(R.id.coma);
-        parentesis = findViewById(R.id.parentesis);
-
-        seno = findViewById(R.id.seno);
-        coseno = findViewById(R.id.coseno);
-        tangente = findViewById(R.id.tangente);
-        igual = findViewById(R.id.igual);
-        invercoseno = findViewById(R.id.invercoseno);
-        inverseno = findViewById(R.id.inverseno);
-        invertangente = findViewById(R.id.invertangente);
-        off = findViewById(R.id.off);
-        factorial = findViewById(R.id.factorial);
-        alapotencia = findViewById(R.id.potencia);
-
-
-        button0.setOnClickListener(this);
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-        button4.setOnClickListener(this);
-        button5.setOnClickListener(this);
-        button6.setOnClickListener(this);
-        button7.setOnClickListener(this);
-        button8.setOnClickListener(this);
-        button9.setOnClickListener(this);
-        division.setOnClickListener(this);
-        multiplicacion.setOnClickListener(this);
-        clear.setOnClickListener(this);
-        delete.setOnClickListener(this);
-        suma.setOnClickListener(this);
-        resta.setOnClickListener(this);
-        potencia.setOnClickListener(this);
-        porcentaje.setOnClickListener(this);
-        coma.setOnClickListener(this);
-        parentesis.setOnClickListener(this);
-        seno.setOnClickListener(this);
-        coseno.setOnClickListener(this);
-        tangente.setOnClickListener(this);
-        igual.setOnClickListener(this);
-        invercoseno.setOnClickListener(this);
-        inverseno.setOnClickListener(this);
-        invertangente.setOnClickListener(this);
-        off.setOnClickListener(this);
-        factorial.setOnClickListener(this);
-        alapotencia.setOnClickListener(this);
+        for(int i=0;i<30;i++){
+            new Button(getApplicationContext());
+            Button btn;
+            btn = findViewById(idsBtns[i]);
+            btn.setOnClickListener(this);
+        }
     }
 
     @Override
@@ -252,49 +201,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pantalla.setText("");
 
                 LogicaNegocio ln = new LogicaNegocio();
-                if(op == 1){
-                    //suma
-                    res = ln.suma(operando1,operando2);
-                }else if(op ==2){
-                    //resta
-                    res = ln.resta(operando1,operando2);
-                }else if(op ==3){
-                    //multi
-                    res = ln.multiplicacion(operando1,operando2);
-                }else if(op ==4){
-                    //division
-                    res = ln.division(operando1,operando2);
-                }else if(op ==5){
-                    //potencia
-                    res = ln.potencia(operando1,operando2);
-                }else if(op ==6){
-                    //porcentaje
-                    res = ln.porcentaje(operando1,operando2);
-                }else if(op ==7){
-                    //raiz
-                    res = ln.raiz(operando1);
-                }else if(op ==8){
-                    //sin
-                    res = ln.seno(operando1);
-                }else if(op ==9){
-                    //cos
-                    res = ln.coseno(operando1);
-                }else if(op ==10){
-                    //tan
-                    res = ln.tangente(operando1);
-                }else if(op ==11){
-                    //csc
-                    res = ln.inverseno(operando1);
-                }else if(op ==12){
-                    //sec
-                    res = ln.invercoseno(operando1);
-                }else if(op ==13){
-                    //ctg
-                    res = ln.invertangente(operando1);
-                }else if(op ==14){
-                    //factorial
-                    res = ln.factorial(operando1);
-                }
+                res = ln.calculoIgual(op,operando1,operando2);
 
                 pantalla.setText(""+res);
                 operando1 = res;

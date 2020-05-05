@@ -32,7 +32,8 @@
         app:layout_constraintTop_toBottomOf="@+id/pantalla"
         app:orientation="horizontal"
         app:rowCount="6"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:id="@+id/contenendor">
 
         <Button
             android:id="@+id/division"
