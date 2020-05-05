@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         alapotencia = findViewById(R.id.potencia);
 
 
-
         button0.setOnClickListener(this);
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
@@ -87,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         factorial.setOnClickListener(this);
         alapotencia.setOnClickListener(this);
     }
+
     @Override
     public void onClick(View v) {
         String captura;
@@ -251,34 +251,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }catch (NumberFormatException e){}
                 pantalla.setText("");
 
+                LogicaNegocio ln = new LogicaNegocio();
                 if(op == 1){
                     //suma
+                    res = ln.suma(operando1,operando2);
                 }else if(op ==2){
                     //resta
+                    res = ln.resta(operando1,operando2);
                 }else if(op ==3){
                     //multi
+                    res = ln.multiplicacion(operando1,operando2);
                 }else if(op ==4){
                     //division
+                    res = ln.division(operando1,operando2);
                 }else if(op ==5){
                     //potencia
+                    res = ln.potencia(operando1,operando2);
                 }else if(op ==6){
                     //porcentaje
+                    res = ln.porcentaje(operando1,operando2);
                 }else if(op ==7){
                     //raiz
+                    res = ln.raiz(operando1);
                 }else if(op ==8){
                     //sin
+                    res = ln.seno(operando1);
                 }else if(op ==9){
                     //cos
+                    res = ln.coseno(operando1);
                 }else if(op ==10){
                     //tan
+                    res = ln.tangente(operando1);
                 }else if(op ==11){
                     //csc
+                    res = ln.inverseno(operando1);
                 }else if(op ==12){
                     //sec
+                    res = ln.invercoseno(operando1);
                 }else if(op ==13){
                     //ctg
+                    res = ln.invertangente(operando1);
                 }else if(op ==14){
                     //factorial
+                    res = ln.factorial(operando1,operando2);
                 }
 
                 pantalla.setText(""+res);
@@ -334,9 +349,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
-
-
-
-
 }
