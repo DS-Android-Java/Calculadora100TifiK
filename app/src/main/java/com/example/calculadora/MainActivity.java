@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     operando1 = Double.parseDouble(aux);
                 }catch (NumberFormatException e){}
 
-                pantalla.setText("Csc("+operando1+")");
+                pantalla.setText("");
                 op=14;
                 break;
             case R.id.raiz:
