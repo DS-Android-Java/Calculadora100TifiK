@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     res = ln.invertangente(operando1);
                 }else if(op ==14){
                     //factorial
-                    res = ln.factorial(operando1,operando2);
+                    res = ln.factorial(operando1);
                 }
 
                 pantalla.setText(""+res);

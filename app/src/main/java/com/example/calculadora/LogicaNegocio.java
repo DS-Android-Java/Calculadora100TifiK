@@ -92,10 +92,10 @@ public class LogicaNegocio {
         return res;
     }
 
-    public double factorial(double op1,double op2){
+    public double factorial(double op1){
         res = 1;
         for (double i=op1; i>=1; i--){
-            res = res*1;
+            res = res*i;
         }
         return res;
     }
