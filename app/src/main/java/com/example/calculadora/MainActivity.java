@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         delete = findViewById(R.id.delete);
         suma = findViewById(R.id.suma);
         resta = findViewById(R.id.resta);
-        potencia = findViewById(R.id.potencia);
+        potencia = findViewById(R.id.raiz);
         porcentaje = findViewById(R.id.porcentaje);
         coma = findViewById(R.id.coma);
         parentesis = findViewById(R.id.parentesis);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         invertangente = findViewById(R.id.invertangente);
         off = findViewById(R.id.off);
         factorial = findViewById(R.id.factorial);
-        alapotencia = findViewById(R.id.alapotencia);
+        alapotencia = findViewById(R.id.potencia);
 
 
 
@@ -89,96 +89,248 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View v) {
+        String captura;
+
         switch (v.getId()) {
            case R.id.num0:
-                Toast.makeText(this, "Button 0 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"0";
+                pantalla.setText(captura);
                 break;
             case R.id.num1:
-                Toast.makeText(this, "Button 1 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"1";
+                pantalla.setText(captura);
                 break;
             case R.id.num2:
-                Toast.makeText(this, "Button 2 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"2";
+                pantalla.setText(captura);
                 break;
             case R.id.num3:
-                Toast.makeText(this, "Button 3 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"3";
+                pantalla.setText(captura);
                 break;
             case R.id.num4:
-                Toast.makeText(this, "Button 4 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"4";
+                pantalla.setText(captura);
                 break;
             case R.id.num5:
-                Toast.makeText(this, "Button 5 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"5";
+                pantalla.setText(captura);
                 break;
             case R.id.num6:
-                Toast.makeText(this, "Button 6 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"6";
+                pantalla.setText(captura);
                 break;
             case R.id.num7:
-                Toast.makeText(this, "Button 7 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"7";
+                pantalla.setText(captura);
                 break;
             case R.id.num8:
-                Toast.makeText(this, "Button 8 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"8";
+                pantalla.setText(captura);
                 break;
             case R.id.num9:
-                Toast.makeText(this, "Button 9 clicked", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+"9";
+                pantalla.setText(captura);
                 break;
             case R.id.division:
-                Toast.makeText(this, "Button of divide", Toast.LENGTH_SHORT).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("");
+                op=4;
                 break;
             case R.id.multi:
-                Toast.makeText(this, "Button of multiply", Toast.LENGTH_SHORT).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("");
+                op=3;
                 break;
             case R.id.clear:
-                Toast.makeText(this, "Button of clear clicked", Toast.LENGTH_SHORT).show();
+                pantalla.setText("");
+                operando1=0.0;
+                operando2=0.0;
+                res=0.0;
                 break;
             case R.id.delete:
-                Toast.makeText(this, "Button of delete", Toast.LENGTH_SHORT).show();
+               if(!pantalla.getText().toString().equals("")){
+                   pantalla.setText(pantalla.getText().subSequence(0, pantalla.getText().length()-1)+"");
+               }
                 break;
             case R.id.suma:
-                Toast.makeText(this, "Button of sum", Toast.LENGTH_SHORT).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+               pantalla.setText("");
+               op=1;
                 break;
             case R.id.resta:
-                Toast.makeText(this, "Button of rest", Toast.LENGTH_SHORT).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("");
+                op=2;
                 break;
             case R.id.potencia:
-                Toast.makeText(this, "Button of potency", Toast.LENGTH_SHORT).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("");
+                op=5;
                 break;
             case R.id.porcentaje:
-                Toast.makeText(this, "Button of percent", Toast.LENGTH_SHORT).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("");
+                op=6;
                 break;
             case R.id.coma:
-                Toast.makeText(this, "Button of comma", Toast.LENGTH_SHORT).show();
+                captura = pantalla.getText().toString();
+                captura = captura+".";
+                pantalla.setText(captura);
                 break;
             case R.id.parentesis:
-                Toast.makeText(this, "Button of parentheses", Toast.LENGTH_SHORT).show();
+                /*captura = pantalla.getText().toString();
+                captura = captura+"()";
+                pantalla.setText(captura);*/
                 break;
             case R.id.seno:
-                Toast.makeText(this,"Botton of sine",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Sin("+operando1+")");
+                op=8;
                 break;
             case R.id.coseno:
-                Toast.makeText(this,"Botton of cosine",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Cos("+operando1+")");
+                op=9;
                 break;
             case R.id.tangente:
-                Toast.makeText(this,"Botton of tangent ",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Tan("+operando1+")");
+                op=10;
                 break;
             case R.id.igual:
-                Toast.makeText(this,"Botton of equal",Toast.LENGTH_LONG).show();
+                try {
+                    String aux2 = pantalla.getText().toString();
+                    operando2 = Double.parseDouble(aux2);
+                }catch (NumberFormatException e){}
+                pantalla.setText("");
+
+                if(op == 1){
+                    //suma
+                }else if(op ==2){
+                    //resta
+                }else if(op ==3){
+                    //multi
+                }else if(op ==4){
+                    //division
+                }else if(op ==5){
+                    //potencia
+                }else if(op ==6){
+                    //porcentaje
+                }else if(op ==7){
+                    //raiz
+                }else if(op ==8){
+                    //sin
+                }else if(op ==9){
+                    //cos
+                }else if(op ==10){
+                    //tan
+                }else if(op ==11){
+                    //csc
+                }else if(op ==12){
+                    //sec
+                }else if(op ==13){
+                    //ctg
+                }else if(op ==14){
+                    //factorial
+                }
+
+                pantalla.setText(""+res);
+                operando1 = res;
                 break;
             case R.id.invercoseno:
-                Toast.makeText(this,"Botton of cosine inverse",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Csc("+operando1+")");
+                op=11;
                 break;
             case R.id.inverseno:
-                Toast.makeText(this,"Botton of sine inverse",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Sec("+operando1+")");
+                op=12;
                 break;
             case R.id.invertangente:
-                Toast.makeText(this,"Botton of tangent inverse",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Ctg("+operando1+")");
+                op=13;
                 break;
             case R.id.off:
-                Toast.makeText(this,"Botton of off ",Toast.LENGTH_LONG).show();
+                finish();
                 break;
             case R.id.factorial:
-                Toast.makeText(this,"Botton of factorial",Toast.LENGTH_LONG).show();
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("Csc("+operando1+")");
+                op=14;
                 break;
-            case R.id.alapotencia:
-                Toast.makeText(this,"Botton of to the power",Toast.LENGTH_LONG).show();
+            case R.id.raiz:
+                try{
+                    String aux = pantalla.getText().toString();
+                    operando1 = Double.parseDouble(aux);
+                }catch (NumberFormatException e){}
+
+                pantalla.setText("√ ("+operando1+")");
+                op=7;
                 break;
         }
     }
