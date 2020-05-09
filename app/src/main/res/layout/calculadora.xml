@@ -9,13 +9,24 @@
     app:layout_constraintTop_toBottomOf="@+id/pantalla">
 
 
+    <TextView
+        android:id="@+id/tvD"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="10dp"
+        android:gravity="top"/>
+
     <EditText
         android:id="@+id/pantalla"
         android:layout_width="394dp"
         android:layout_height="95dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="0"
+        android:text=""
         android:textSize="24dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="8dp"

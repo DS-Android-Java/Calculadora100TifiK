@@ -7,14 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     EditText pantalla;
+    TextView tvD;
     public double operando1, operando2, res;
-    int op, error;
+    int op, error, format;
+    String tvDigitado;
 
     public int idsBtns[] = {R.id.num0, R.id.num1, R.id.num2, R.id.num3, R.id.num4, R.id.num5, R.id.num6, R.id.num7, R.id.num8, R.id.num9,
             R.id.division, R.id.multi, R.id.clear, R.id.delete, R.id.suma, R.id.resta, R.id.raiz, R.id.porcentaje, R.id.coma, R.id.parentesis,
@@ -26,9 +29,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calculadora);
 
-        pantalla = (EditText) findViewById(R.id.pantalla);
-
+        pantalla = findViewById(R.id.pantalla);
+        tvD = findViewById(R.id.tvD);
+        tvDigitado = "";
         error = 0;
+        format = 0;
         for (int i = 0; i < 30; i++) {
             new Button(getApplicationContext());
             Button btn;
@@ -40,7 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         String captura;
+        String capturaAux;
 
+        if (op == -1) {
+            tvDigitado = "" + res;
+            tvD.setText(tvDigitado);
+        }
         switch (v.getId()) {
             case R.id.num0:
                 captura = pantalla.getText().toString();
@@ -102,9 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (NumberFormatException e) {
                     }
 
+                    tvDigitado = pantalla.getText() + "/";
                     pantalla.setText("");
+                    tvD.setText(tvDigitado);
                     op = 4;
                     error++;
+                    format = 2;
                 }
                 break;
             case R.id.multi:
@@ -117,9 +130,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (NumberFormatException e) {
                     }
 
+                    tvDigitado = pantalla.getText() + "*";
                     pantalla.setText("");
+                    tvD.setText(tvDigitado);
                     op = 3;
                     error++;
+                    format = 2;
                 }
                 break;
             case R.id.clear:
@@ -128,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 operando2 = 0.0;
                 res = 0.0;
                 error = 0;
+                tvDigitado = "";
+                tvD.setText(tvDigitado);
                 break;
             case R.id.delete:
                 if (!pantalla.getText().toString().equals("")) {
@@ -141,8 +159,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (NumberFormatException e) {
                 }
 
+                if (format == 2) {//Para cuando son funciones especiales
+                    tvDigitado = tvDigitado + pantalla.getText() + "+";
+                } else {
+                    tvDigitado = pantalla.getText() + "+";
+                    op = 1;
+                }
                 pantalla.setText("");
-                op = 1;
+                tvD.setText(tvDigitado);
+                //op = 1;
                 break;
             case R.id.resta:
                 try {
@@ -151,8 +176,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (NumberFormatException e) {
                 }
 
+                if (format == 2) {//Para cuando son funciones especiales
+                    tvDigitado = tvDigitado + pantalla.getText() + "-";
+                    operando1 = -operando1;
+                } else {
+                    tvDigitado = pantalla.getText() + "-";
+                    op = 2;
+                }
                 pantalla.setText("");
-                op = 2;
+                tvD.setText(tvDigitado);
+                //op = 2;
                 break;
             case R.id.potencia:
                 if (error >= 1) {
@@ -164,19 +197,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (NumberFormatException e) {
                     }
 
+                    if (format == 2) {//Para cuando son funciones especiales
+                        tvDigitado = tvDigitado + pantalla.getText() + "^";
+                        operando1 = -operando1;
+                    } else {
+                        tvDigitado = pantalla.getText() + "^";
+                        op = 5;
+                    }
                     pantalla.setText("");
-                    op = 5;
                     error++;
                 }
                 break;
             case R.id.porcentaje:
-                try {
-                    String aux = pantalla.getText().toString();
-                    operando1 = Double.parseDouble(aux);
-                } catch (NumberFormatException e) {
+                if (error >= 1) {
+                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+                } else {
+                    try {
+                        String aux = pantalla.getText().toString();
+                        operando1 = Double.parseDouble(aux);
+                    } catch (NumberFormatException e) {
+                    }
+                    tvDigitado = pantalla.getText() + "%";
+                    pantalla.setText("");
+                    tvD.setText(tvDigitado);
+                    op = 6;
                 }
-                pantalla.setText("");
-                op = 6;
                 break;
             case R.id.coma:
                 captura = pantalla.getText().toString();
@@ -199,6 +244,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("Sin(" + operando1 + ")");
+                    tvDigitado = "Sin(" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 8;
                     error++;
                 }
@@ -214,6 +262,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("Cos(" + operando1 + ")");
+                    tvDigitado = "Cos(" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 9;
                     error++;
                 }
@@ -229,6 +280,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("Tan(" + operando1 + ")");
+                    tvDigitado = "Tan(" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 10;
                     error++;
                 }
@@ -244,9 +298,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 LogicaNegocio ln = new LogicaNegocio();
                 res = ln.calculoIgual(op, operando1, operando2);
 
+                if (format == 1) {//Para cuando son funciones especiales
+                    tvDigitado = tvDigitado + " = " + res;
+                } else {
+                    tvDigitado = tvDigitado + operando2 + " = " + res;
+                }
                 pantalla.setText("" + res);
                 operando1 = res;
+                tvD.setText(tvDigitado);
+                op = -1;
                 error = 0;
+                format = 0;
                 break;
             case R.id.invercoseno:
                 if (error >= 1) {
@@ -259,6 +321,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("Csc(" + operando1 + ")");
+                    tvDigitado = "Csc(" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 11;
                     error++;
                 }
@@ -274,6 +339,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("Sec(" + operando1 + ")");
+                    tvDigitado = "Sec(" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 12;
                     error++;
                 }
@@ -289,6 +357,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("Ctg(" + operando1 + ")");
+                    tvDigitado = "Ctg(" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 13;
                     error++;
                 }
@@ -306,7 +377,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (NumberFormatException e) {
                     }
 
+                    tvDigitado = pantalla.getText() + "!";
                     pantalla.setText("");
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 14;
                     error++;
                 }
@@ -322,6 +396,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     pantalla.setText("√ (" + operando1 + ")");
+                    tvDigitado = "√ (" + operando1 + ")";
+                    tvD.setText(tvDigitado);
+                    format = 1;
                     op = 7;
                     error++;
                 }
