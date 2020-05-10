@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //metodos
     private void metDivision() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metMultiplicacion() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metPotencia() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -351,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metPorcentaje() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metSeno() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metCoseno() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -421,7 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metTangente() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -469,7 +469,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metInverCoseno() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -493,7 +493,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metInverSeno() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -517,7 +517,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metInverTangente() {
         if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar otra operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -541,7 +541,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metFactorial() {
         if (error >= 1 || op == 2) {
-            Toast.makeText(this, "No puede seleccionar esta operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar esta operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -560,7 +560,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void metRaiz() {
         if (error >= 1 || op == 2) {
-            Toast.makeText(this, "No puede seleccionar esta operacion", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No puede seleccionar esta operación", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
