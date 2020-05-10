@@ -141,81 +141,94 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    private void capCero(){
+
+    private void capCero() {
         captura = pantalla.getText().toString();
         captura = captura + "0";
         pantalla.setText(captura);
     }
-    private void capUno(){
+
+    private void capUno() {
         captura = pantalla.getText().toString();
         captura = captura + "1";
         pantalla.setText(captura);
     }
-    private void capDos(){
+
+    private void capDos() {
         captura = pantalla.getText().toString();
         captura = captura + "2";
         pantalla.setText(captura);
     }
 
-    private void capTres(){
+    private void capTres() {
         captura = pantalla.getText().toString();
         captura = captura + "3";
         pantalla.setText(captura);
     }
-    private void capCuatro(){
+
+    private void capCuatro() {
         captura = pantalla.getText().toString();
         captura = captura + "4";
         pantalla.setText(captura);
     }
-    private void capCinco(){
+
+    private void capCinco() {
         captura = pantalla.getText().toString();
         captura = captura + "5";
         pantalla.setText(captura);
 
     }
-    private void capSeis(){
+
+    private void capSeis() {
         captura = pantalla.getText().toString();
         captura = captura + "6";
         pantalla.setText(captura);
     }
-    private void capSiete(){
+
+    private void capSiete() {
         captura = pantalla.getText().toString();
         captura = captura + "7";
         pantalla.setText(captura);
     }
-    private void capOcho(){
+
+    private void capOcho() {
         captura = pantalla.getText().toString();
         captura = captura + "8";
         pantalla.setText(captura);
     }
-    private void capNueve(){
+
+    private void capNueve() {
         captura = pantalla.getText().toString();
         captura = captura + "9";
         pantalla.setText(captura);
     }
-    private void capComa(){
+
+    private void capComa() {
         captura = pantalla.getText().toString();
         captura = captura + ".";
         pantalla.setText(captura);
 
     }
-    private void capClear(){
+
+    private void capClear() {
         pantalla.setText("");
         operando1 = 0.0;
         operando2 = 0.0;
         res = 0.0;
         error = 0;
         tvDigitado = "";
+        op = 0;
         tvD.setText(tvDigitado);
     }
-    private void capDelete(){
+
+    private void capDelete() {
         if (!pantalla.getText().toString().equals("")) {
             pantalla.setText(pantalla.getText().subSequence(0, pantalla.getText().length() - 1) + "");
         }
     }
 
     //metodos
-    private void metDivision(){
+    private void metDivision() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -225,7 +238,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            tvDigitado = pantalla.getText() + "/";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "-" + pantalla.getText() + "/";
+            } else {
+                tvDigitado = pantalla.getText() + "/";
+            }
             pantalla.setText("");
             tvD.setText(tvDigitado);
             op = 4;
@@ -233,7 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             format = 2;
         }
     }
-    private void metMultiplicacion(){
+
+    private void metMultiplicacion() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -243,7 +262,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            tvDigitado = pantalla.getText() + "*";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "-" + pantalla.getText() + "*";
+            } else {
+                tvDigitado = pantalla.getText() + "*";
+            }
             pantalla.setText("");
             tvD.setText(tvDigitado);
             op = 3;
@@ -251,15 +275,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             format = 2;
         }
     }
-    private  void metSuma(){
+
+    private void metSuma() {
         try {
             String aux = pantalla.getText().toString();
             operando1 = Double.parseDouble(aux);
         } catch (NumberFormatException e) {
         }
 
-        if (format == 2) {//Para cuando son funciones especiales
+        if (op == 2 && format == 0) {
+            operando1 = -operando1;
+            tvDigitado = "-" + pantalla.getText() + "+";
+            op = 1;
+        } else if (format == 2) {//Para cuando son funciones especiales
             tvDigitado = tvDigitado + pantalla.getText() + "+";
+        } else if (op == 1 && format == 0) {
+            tvDigitado = "+" + pantalla.getText() + "+";
+            op = 1;
         } else {
             tvDigitado = pantalla.getText() + "+";
             op = 1;
@@ -267,16 +299,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pantalla.setText("");
         tvD.setText(tvDigitado);
     }
-    private  void metResta(){
+
+    private void metResta() {
         try {
             String aux = pantalla.getText().toString();
             operando1 = Double.parseDouble(aux);
         } catch (NumberFormatException e) {
         }
 
-        if (format == 2) {//Para cuando son funciones especiales
+        if (op == 2 && format == 0) {
+            operando1 = -operando1;
+            tvDigitado = "-" + pantalla.getText() + "-";
+            op = 2;
+        } else if (format == 2) {//Para cuando son funciones especiales
             tvDigitado = tvDigitado + pantalla.getText() + "-";
             operando1 = -operando1;
+        } else if (op == 1 && format == 0) {
+            tvDigitado = "+" + pantalla.getText() + "-";
+            op = 2;
         } else {
             tvDigitado = pantalla.getText() + "-";
             op = 2;
@@ -284,7 +324,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pantalla.setText("");
         tvD.setText(tvDigitado);
     }
-    private void metPotencia(){
+
+    private void metPotencia() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -294,18 +335,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            if (format == 2) {//Para cuando son funciones especiales
-                tvDigitado = tvDigitado + pantalla.getText() + "^";
+            if (op == 2) {
                 operando1 = -operando1;
+                tvDigitado = "-" + pantalla.getText() + "^";
             } else {
                 tvDigitado = pantalla.getText() + "^";
-                op = 5;
             }
             pantalla.setText("");
+            tvD.setText(tvDigitado);
+            op = 5;
             error++;
+            format = 2;
         }
     }
-    private void metPorcentaje(){
+
+    private void metPorcentaje() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -314,13 +358,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 operando1 = Double.parseDouble(aux);
             } catch (NumberFormatException e) {
             }
-            tvDigitado = pantalla.getText() + "%";
+
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "-" + pantalla.getText() + "%";
+            } else {
+                tvDigitado = pantalla.getText() + "%";
+            }
             pantalla.setText("");
             tvD.setText(tvDigitado);
             op = 6;
         }
     }
-    private void metSeno(){
+
+    private void metSeno() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -329,15 +380,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 operando1 = Double.parseDouble(aux);
             } catch (NumberFormatException e) {
             }
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "Sin(" + operando1 + ")";
+            } else {
+                pantalla.setText("Sin(" + operando1 + ")");
+                tvDigitado = "Sin(" + operando1 + ")";
+            }
 
-            pantalla.setText("Sin(" + operando1 + ")");
-            tvDigitado = "Sin(" + operando1 + ")";
             tvD.setText(tvDigitado);
             format = 1;
             op = 8;
             error++;
         }
     }
+
     private void metCoseno() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
@@ -348,15 +405,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            pantalla.setText("Cos(" + operando1 + ")");
-            tvDigitado = "Cos(" + operando1 + ")";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "Cos(" + operando1 + ")";
+            } else {
+                pantalla.setText("Cos(" + operando1 + ")");
+                tvDigitado = "Cos(" + operando1 + ")";
+            }
             tvD.setText(tvDigitado);
             format = 1;
             op = 9;
             error++;
         }
     }
-    private void metTangente(){
+
+    private void metTangente() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -366,15 +429,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            pantalla.setText("Tan(" + operando1 + ")");
-            tvDigitado = "Tan(" + operando1 + ")";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "Tan(" + operando1 + ")";
+            } else {
+                pantalla.setText("Tan(" + operando1 + ")");
+                tvDigitado = "Tan(" + operando1 + ")";
+            }
             tvD.setText(tvDigitado);
             format = 1;
             op = 10;
             error++;
         }
     }
-    private void metIgual(){
+
+    private void metIgual() {
         try {
             String aux2 = pantalla.getText().toString();
             operando2 = Double.parseDouble(aux2);
@@ -397,7 +466,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         error = 0;
         format = 0;
     }
-    private void metInverCoseno(){
+
+    private void metInverCoseno() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -407,15 +477,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            pantalla.setText("Csc(" + operando1 + ")");
-            tvDigitado = "Csc(" + operando1 + ")";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "Csc(" + operando1 + ")";
+            } else {
+                pantalla.setText("Csc(" + operando1 + ")");
+                tvDigitado = "Csc(" + operando1 + ")";
+            }
             tvD.setText(tvDigitado);
             format = 1;
             op = 11;
             error++;
         }
     }
-    private  void metInverSeno(){
+
+    private void metInverSeno() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -425,15 +501,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            pantalla.setText("Sec(" + operando1 + ")");
-            tvDigitado = "Sec(" + operando1 + ")";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "Sec(" + operando1 + ")";
+            } else {
+                pantalla.setText("Sec(" + operando1 + ")");
+                tvDigitado = "Sec(" + operando1 + ")";
+            }
             tvD.setText(tvDigitado);
             format = 1;
             op = 12;
             error++;
         }
     }
-    private void metInverTangente(){
+
+    private void metInverTangente() {
         if (error >= 1) {
             Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
         } else {
@@ -443,17 +525,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (NumberFormatException e) {
             }
 
-            pantalla.setText("Ctg(" + operando1 + ")");
-            tvDigitado = "Ctg(" + operando1 + ")";
+            if (op == 2) {
+                operando1 = -operando1;
+                tvDigitado = "Ctg(" + operando1 + ")";
+            } else {
+                pantalla.setText("Ctg(" + operando1 + ")");
+                tvDigitado = "Ctg(" + operando1 + ")";
+            }
             tvD.setText(tvDigitado);
             format = 1;
             op = 13;
             error++;
         }
     }
-    private void metFactorial(){
-        if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+
+    private void metFactorial() {
+        if (error >= 1 || op == 2) {
+            Toast.makeText(this, "No puede seleccionar esta operacion", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -469,9 +557,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             error++;
         }
     }
-    private void metRaiz(){
-        if (error >= 1) {
-            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+
+    private void metRaiz() {
+        if (error >= 1 || op == 2) {
+            Toast.makeText(this, "No puede seleccionar esta operacion", Toast.LENGTH_LONG).show();
         } else {
             try {
                 String aux = pantalla.getText().toString();
@@ -489,4 +578,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
-
