@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public double operando1, operando2, res;
     int op, error, format;
     String tvDigitado;
+    String captura;
 
     public int idsBtns[] = {R.id.num0, R.id.num1, R.id.num2, R.id.num3, R.id.num4, R.id.num5, R.id.num6, R.id.num7, R.id.num8, R.id.num9,
             R.id.division, R.id.multi, R.id.clear, R.id.delete, R.id.suma, R.id.resta, R.id.raiz, R.id.porcentaje, R.id.coma, R.id.parentesis,
@@ -44,189 +45,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        String captura;
-        String capturaAux;
 
-        if (op == -1) {
-            tvDigitado = "" + res;
-            tvD.setText(tvDigitado);
-        }
         switch (v.getId()) {
             case R.id.num0:
-                captura = pantalla.getText().toString();
-                captura = captura + "0";
-                pantalla.setText(captura);
+                capCero();
                 break;
             case R.id.num1:
-                captura = pantalla.getText().toString();
-                captura = captura + "1";
-                pantalla.setText(captura);
+                capUno();
                 break;
             case R.id.num2:
-                captura = pantalla.getText().toString();
-                captura = captura + "2";
-                pantalla.setText(captura);
+                capDos();
                 break;
             case R.id.num3:
-                captura = pantalla.getText().toString();
-                captura = captura + "3";
-                pantalla.setText(captura);
+                capTres();
                 break;
             case R.id.num4:
-                captura = pantalla.getText().toString();
-                captura = captura + "4";
-                pantalla.setText(captura);
+                capCuatro();
                 break;
             case R.id.num5:
-                captura = pantalla.getText().toString();
-                captura = captura + "5";
-                pantalla.setText(captura);
+                capCinco();
                 break;
             case R.id.num6:
-                captura = pantalla.getText().toString();
-                captura = captura + "6";
-                pantalla.setText(captura);
+                capSeis();
                 break;
             case R.id.num7:
-                captura = pantalla.getText().toString();
-                captura = captura + "7";
-                pantalla.setText(captura);
+                capSiete();
                 break;
             case R.id.num8:
-                captura = pantalla.getText().toString();
-                captura = captura + "8";
-                pantalla.setText(captura);
+                capOcho();
                 break;
             case R.id.num9:
-                captura = pantalla.getText().toString();
-                captura = captura + "9";
-                pantalla.setText(captura);
+                capNueve();
                 break;
             case R.id.division:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    tvDigitado = pantalla.getText() + "/";
-                    pantalla.setText("");
-                    tvD.setText(tvDigitado);
-                    op = 4;
-                    error++;
-                    format = 2;
-                }
+                metDivision();
                 break;
             case R.id.multi:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    tvDigitado = pantalla.getText() + "*";
-                    pantalla.setText("");
-                    tvD.setText(tvDigitado);
-                    op = 3;
-                    error++;
-                    format = 2;
-                }
+                metMultiplicacion();
                 break;
             case R.id.clear:
-                pantalla.setText("");
-                operando1 = 0.0;
-                operando2 = 0.0;
-                res = 0.0;
-                error = 0;
-                tvDigitado = "";
-                tvD.setText(tvDigitado);
+                capClear();
                 break;
             case R.id.delete:
-                if (!pantalla.getText().toString().equals("")) {
-                    pantalla.setText(pantalla.getText().subSequence(0, pantalla.getText().length() - 1) + "");
-                }
+                capDelete();
                 break;
             case R.id.suma:
-                try {
-                    String aux = pantalla.getText().toString();
-                    operando1 = Double.parseDouble(aux);
-                } catch (NumberFormatException e) {
-                }
-
-                if (format == 2) {//Para cuando son funciones especiales
-                    tvDigitado = tvDigitado + pantalla.getText() + "+";
-                } else {
-                    tvDigitado = pantalla.getText() + "+";
-                    op = 1;
-                }
-                pantalla.setText("");
-                tvD.setText(tvDigitado);
-                //op = 1;
+                metSuma();
                 break;
             case R.id.resta:
-                try {
-                    String aux = pantalla.getText().toString();
-                    operando1 = Double.parseDouble(aux);
-                } catch (NumberFormatException e) {
-                }
-
-                if (format == 2) {//Para cuando son funciones especiales
-                    tvDigitado = tvDigitado + pantalla.getText() + "-";
-                    operando1 = -operando1;
-                } else {
-                    tvDigitado = pantalla.getText() + "-";
-                    op = 2;
-                }
-                pantalla.setText("");
-                tvD.setText(tvDigitado);
-                //op = 2;
+                metResta();
                 break;
             case R.id.potencia:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    if (format == 2) {//Para cuando son funciones especiales
-                        tvDigitado = tvDigitado + pantalla.getText() + "^";
-                        operando1 = -operando1;
-                    } else {
-                        tvDigitado = pantalla.getText() + "^";
-                        op = 5;
-                    }
-                    pantalla.setText("");
-                    error++;
-                }
+                metPotencia();
                 break;
             case R.id.porcentaje:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-                    tvDigitado = pantalla.getText() + "%";
-                    pantalla.setText("");
-                    tvD.setText(tvDigitado);
-                    op = 6;
-                }
+                metPorcentaje();
                 break;
             case R.id.coma:
-                captura = pantalla.getText().toString();
-                captura = captura + ".";
-                pantalla.setText(captura);
+                capComa();
                 break;
             case R.id.parentesis:
                 /*captura = pantalla.getText().toString();
@@ -234,175 +110,383 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 pantalla.setText(captura);*/
                 break;
             case R.id.seno:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("Sin(" + operando1 + ")");
-                    tvDigitado = "Sin(" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 8;
-                    error++;
-                }
+                metSeno();
                 break;
             case R.id.coseno:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("Cos(" + operando1 + ")");
-                    tvDigitado = "Cos(" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 9;
-                    error++;
-                }
+                metCoseno();
                 break;
             case R.id.tangente:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("Tan(" + operando1 + ")");
-                    tvDigitado = "Tan(" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 10;
-                    error++;
-                }
+                metTangente();
                 break;
             case R.id.igual:
-                try {
-                    String aux2 = pantalla.getText().toString();
-                    operando2 = Double.parseDouble(aux2);
-                } catch (NumberFormatException e) {
-                }
-                pantalla.setText("");
-
-                LogicaNegocio ln = new LogicaNegocio();
-                res = ln.calculoIgual(op, operando1, operando2);
-
-                if (format == 1) {//Para cuando son funciones especiales
-                    tvDigitado = tvDigitado + " = " + res;
-                } else {
-                    tvDigitado = tvDigitado + operando2 + " = " + res;
-                }
-                pantalla.setText("" + res);
-                operando1 = res;
-                tvD.setText(tvDigitado);
-                op = -1;
-                error = 0;
-                format = 0;
+                metIgual();
                 break;
             case R.id.invercoseno:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("Csc(" + operando1 + ")");
-                    tvDigitado = "Csc(" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 11;
-                    error++;
-                }
+                metInverCoseno();
                 break;
             case R.id.inverseno:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("Sec(" + operando1 + ")");
-                    tvDigitado = "Sec(" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 12;
-                    error++;
-                }
+                metInverSeno();
                 break;
             case R.id.invertangente:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("Ctg(" + operando1 + ")");
-                    tvDigitado = "Ctg(" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 13;
-                    error++;
-                }
+                metInverTangente();
                 break;
             case R.id.off:
                 finish();
                 break;
             case R.id.factorial:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    tvDigitado = pantalla.getText() + "!";
-                    pantalla.setText("");
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 14;
-                    error++;
-                }
+                metFactorial();
                 break;
             case R.id.raiz:
-                if (error >= 1) {
-                    Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        String aux = pantalla.getText().toString();
-                        operando1 = Double.parseDouble(aux);
-                    } catch (NumberFormatException e) {
-                    }
-
-                    pantalla.setText("√ (" + operando1 + ")");
-                    tvDigitado = "√ (" + operando1 + ")";
-                    tvD.setText(tvDigitado);
-                    format = 1;
-                    op = 7;
-                    error++;
-                }
+                metRaiz();
                 break;
         }
     }
+    private void capCero(){
+        captura = pantalla.getText().toString();
+        captura = captura + "0";
+        pantalla.setText(captura);
+    }
+    private void capUno(){
+        captura = pantalla.getText().toString();
+        captura = captura + "1";
+        pantalla.setText(captura);
+    }
+    private void capDos(){
+        captura = pantalla.getText().toString();
+        captura = captura + "2";
+        pantalla.setText(captura);
+    }
+
+    private void capTres(){
+        captura = pantalla.getText().toString();
+        captura = captura + "3";
+        pantalla.setText(captura);
+    }
+    private void capCuatro(){
+        captura = pantalla.getText().toString();
+        captura = captura + "4";
+        pantalla.setText(captura);
+    }
+    private void capCinco(){
+        captura = pantalla.getText().toString();
+        captura = captura + "5";
+        pantalla.setText(captura);
+
+    }
+    private void capSeis(){
+        captura = pantalla.getText().toString();
+        captura = captura + "6";
+        pantalla.setText(captura);
+    }
+    private void capSiete(){
+        captura = pantalla.getText().toString();
+        captura = captura + "7";
+        pantalla.setText(captura);
+    }
+    private void capOcho(){
+        captura = pantalla.getText().toString();
+        captura = captura + "8";
+        pantalla.setText(captura);
+    }
+    private void capNueve(){
+        captura = pantalla.getText().toString();
+        captura = captura + "9";
+        pantalla.setText(captura);
+    }
+    private void capComa(){
+        captura = pantalla.getText().toString();
+        captura = captura + ".";
+        pantalla.setText(captura);
+
+    }
+    private void capClear(){
+        pantalla.setText("");
+        operando1 = 0.0;
+        operando2 = 0.0;
+        res = 0.0;
+        error = 0;
+        tvDigitado = "";
+        tvD.setText(tvDigitado);
+    }
+    private void capDelete(){
+        if (!pantalla.getText().toString().equals("")) {
+            pantalla.setText(pantalla.getText().subSequence(0, pantalla.getText().length() - 1) + "");
+        }
+    }
+
+    //metodos
+    private void metDivision(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            tvDigitado = pantalla.getText() + "/";
+            pantalla.setText("");
+            tvD.setText(tvDigitado);
+            op = 4;
+            error++;
+            format = 2;
+        }
+    }
+    private void metMultiplicacion(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            tvDigitado = pantalla.getText() + "*";
+            pantalla.setText("");
+            tvD.setText(tvDigitado);
+            op = 3;
+            error++;
+            format = 2;
+        }
+    }
+    private  void metSuma(){
+        try {
+            String aux = pantalla.getText().toString();
+            operando1 = Double.parseDouble(aux);
+        } catch (NumberFormatException e) {
+        }
+
+        if (format == 2) {//Para cuando son funciones especiales
+            tvDigitado = tvDigitado + pantalla.getText() + "+";
+        } else {
+            tvDigitado = pantalla.getText() + "+";
+            op = 1;
+        }
+        pantalla.setText("");
+        tvD.setText(tvDigitado);
+    }
+    private  void metResta(){
+        try {
+            String aux = pantalla.getText().toString();
+            operando1 = Double.parseDouble(aux);
+        } catch (NumberFormatException e) {
+        }
+
+        if (format == 2) {//Para cuando son funciones especiales
+            tvDigitado = tvDigitado + pantalla.getText() + "-";
+            operando1 = -operando1;
+        } else {
+            tvDigitado = pantalla.getText() + "-";
+            op = 2;
+        }
+        pantalla.setText("");
+        tvD.setText(tvDigitado);
+    }
+    private void metPotencia(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            if (format == 2) {//Para cuando son funciones especiales
+                tvDigitado = tvDigitado + pantalla.getText() + "^";
+                operando1 = -operando1;
+            } else {
+                tvDigitado = pantalla.getText() + "^";
+                op = 5;
+            }
+            pantalla.setText("");
+            error++;
+        }
+    }
+    private void metPorcentaje(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+            tvDigitado = pantalla.getText() + "%";
+            pantalla.setText("");
+            tvD.setText(tvDigitado);
+            op = 6;
+        }
+    }
+    private void metSeno(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("Sin(" + operando1 + ")");
+            tvDigitado = "Sin(" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 8;
+            error++;
+        }
+    }
+    private void metCoseno() {
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("Cos(" + operando1 + ")");
+            tvDigitado = "Cos(" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 9;
+            error++;
+        }
+    }
+    private void metTangente(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("Tan(" + operando1 + ")");
+            tvDigitado = "Tan(" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 10;
+            error++;
+        }
+    }
+    private void metIgual(){
+        try {
+            String aux2 = pantalla.getText().toString();
+            operando2 = Double.parseDouble(aux2);
+        } catch (NumberFormatException e) {
+        }
+        pantalla.setText("");
+
+        LogicaNegocio ln = new LogicaNegocio();
+        res = ln.calculoIgual(op, operando1, operando2);
+
+        if (format == 1) {//Para cuando son funciones especiales
+            tvDigitado = tvDigitado + " = " + res;
+        } else {
+            tvDigitado = tvDigitado + operando2 + " = " + res;
+        }
+        pantalla.setText("" + res);
+        operando1 = res;
+        tvD.setText(tvDigitado);
+        op = -1;
+        error = 0;
+        format = 0;
+    }
+    private void metInverCoseno(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("Csc(" + operando1 + ")");
+            tvDigitado = "Csc(" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 11;
+            error++;
+        }
+    }
+    private  void metInverSeno(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("Sec(" + operando1 + ")");
+            tvDigitado = "Sec(" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 12;
+            error++;
+        }
+    }
+    private void metInverTangente(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("Ctg(" + operando1 + ")");
+            tvDigitado = "Ctg(" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 13;
+            error++;
+        }
+    }
+    private void metFactorial(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            tvDigitado = pantalla.getText() + "!";
+            pantalla.setText("");
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 14;
+            error++;
+        }
+    }
+    private void metRaiz(){
+        if (error >= 1) {
+            Toast.makeText(this, "No puede seleccionar otra operacion", Toast.LENGTH_LONG).show();
+        } else {
+            try {
+                String aux = pantalla.getText().toString();
+                operando1 = Double.parseDouble(aux);
+            } catch (NumberFormatException e) {
+            }
+
+            pantalla.setText("√ (" + operando1 + ")");
+            tvDigitado = "√ (" + operando1 + ")";
+            tvD.setText(tvDigitado);
+            format = 1;
+            op = 7;
+            error++;
+        }
+    }
+
 }
+
